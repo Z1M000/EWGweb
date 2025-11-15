@@ -45,6 +45,11 @@ class Comment(BaseModel):
     time: int
     text: str
 
+class Activity(BaseModel):
+    name: str
+    points: int
+    date: int
+
 @app.post("/login")
 def login(request: LoginRequest):
         
@@ -65,6 +70,13 @@ def get_activities():
     print("frontend wants all activities")
     acts = list(act_col.find({}, {"_id": 0}).sort("date", -1))
     return acts
+
+@app.post("/activities")
+def store_activity(act: Activity):
+    print("Storing an activity to backend")
+    act_col.insert_one(act.dict())
+    return {"status": "success"}
+
 
 @app.get("/comments")
 def get_comments():
