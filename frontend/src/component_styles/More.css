@@ -1,3 +1,8 @@
+.information{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
 .game-summary{
     font-size: 1.25rem;
     font-weight: 600;
