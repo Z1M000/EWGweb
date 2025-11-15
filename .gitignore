@@ -1,14 +1,4 @@
 backend/.env
-frontend/
+frontend_zimo/
 backend/debug.py
 __pycache__/
-
-# 但是先把中间目录放行
-!frontend/src/
-!frontend/src/components/
-!frontend/src/component_styles/
-
-# 再放行你要的三个文件
-!frontend/src/App.jsx
-!frontend/src/components/AuthPage.jsx
-!frontend/src/component_styles/AuthPage.css

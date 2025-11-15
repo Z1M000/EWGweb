@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../component_styles/AuthPage.css";
 
 const backend_uri = "http://127.0.0.1:8000";
@@ -7,6 +8,7 @@ function AuthPage({ onLogin }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -28,12 +30,12 @@ function AuthPage({ onLogin }) {
       const data = await res.json();
 
       if (!res.ok) {
-        // 401, or invalid username or password
         setError("Invalid username or password");
         return;
       }
 
       onLogin({ username: data.username });
+      navigate("/");
     } catch (err) {
       setError("Error: " + err);
     }
