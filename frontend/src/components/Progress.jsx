@@ -1,27 +1,21 @@
-// import '../component_styles/Progress.css'
-
-// function Progress({ activities }) {
-//   return (
-//     <div className = "outer-container">
-//       <div className = "middle-container">
-
-//           <div className='points-container'>
-//             <p className='point-value'> Progress </p>
 import "../component_styles/Progress.css";
 import { useState, useEffect } from "react";
 
-function Progress() {
+function Progress({ reload }) {
   const [activities, setActivities] = useState([]);
   const [totalPoints, setTotalPoints] = useState(0);
   const [error, setError] = useState("");
 
-  useEffect(function () {
-    loadActivities();
-  }, []);
+  useEffect(
+    function () {
+      loadActivities();
+    },
+    [reload]
+  );
 
   async function loadActivities() {
     try {
-      const uri = backend_uri + "/activities";
+      const uri = "http://127.0.0.1:8000/activities";
       const res = await fetch(uri);
       const data = await res.json();
 
@@ -38,6 +32,14 @@ function Progress() {
     }
   }
 
+  function formatMMDDYYYY_noTZ(ts) {
+    const iso = new Date(ts).toISOString().slice(0, 10); // "2025-11-02"
+    const [year, month, day] = iso.split("-");
+    return `${month}/${day}/${year}`;
+  }
+
+  let remaining = totalPoints;
+
   return (
     <div className="outer-container">
       <div className="middle-container">
@@ -47,79 +49,30 @@ function Progress() {
 
         <div className="table-container">
           <table className="progress-table">
-//             <thead>
-//               <tr className="table-headers">
-//                   <td>Actitivty</td>
-//                   <td>Points</td>
-//                   <td>Total After</td>
-//                   <td>Date</td>
-//                 </tr>
-//                 </thead>
+            <thead>
+              <tr>
+                <th>Activity</th>
+                <th>Points</th>
+                <th>Total after</th>
+                <th>Date</th>
+              </tr>
+            </thead>
 
-//             <tbody className='table-data'>
-//           {activities.map((a, index) => (
-//             <tr key={index}>
-//               <td>{a.activityName}</td>
-//               <td>{a.points}</td>
-//               <td>{a.totalAfter}</td>
-//               <td>{a.date}</td>
-//             </tr>
-//           ))}
-//         </tbody>
+            <tbody>
+              {activities.map(function (act, idx) {
+                let current = remaining;
+                remaining -= act.points;
 
-
-//           </table>
-//         </div>
-
-            <tr className="table-headers">
-              <td>Activity</td>
-              <td>Points</td>
-              <td>Total After</td>
-              <td>Date</td>
-            </tr>
-
-            {/* Made up data need to connect later */}
-            <tr className="table-data">
-              <td>Team lift</td>
-              <td>+6</td>
-              <td>164</td>
-              <td>2025-02-20</td>
-            </tr>
-
-            <tr className="table-data">
-              <td>Short game practice</td>
-              <td>+8</td>
-              <td>164</td>
-              <td>2025-02-19</td>
-            </tr>
-
-            <tr className="table-data">
-              <td>Putter game</td>
-              <td>+4</td>
-              <td>164</td>
-              <td>2025-02-21</td>
-            </tr>
-
-            <tr className="table-data">
-              <td>Team lift</td>
-              <td>+6</td>
-              <td>164</td>
-              <td>2025-02-20</td>
-            </tr>
-
-            <tr className="table-data">
-              <td>Short game practice</td>
-              <td>+8</td>
-              <td>164</td>
-              <td>2025-02-19</td>
-            </tr>
-
-            <tr className="table-data">
-              <td>Putter game</td>
-              <td>+4</td>
-              <td>164</td>
-              <td>2025-02-21</td>
-            </tr>
+                return (
+                  <tr key={idx} className="table-data">
+                    <td>{act.name}</td>
+                    <td>{act.points}</td>
+                    <td>{current}</td>
+                    <td>{formatMMDDYYYY_noTZ(act.date)}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
           </table>
         </div>
       </div>
