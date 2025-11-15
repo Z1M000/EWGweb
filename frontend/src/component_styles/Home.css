@@ -1,0 +1,28 @@
+.outer-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.middle-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #FFFFFF;
+    padding: 1%;
+    border-radius: 10px;
+    width: 95%;  
+    gap: 20px; 
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+body{
+    text-align: center;
+    background-color: #bdbfc1;
+}

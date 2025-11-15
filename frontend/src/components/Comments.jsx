@@ -14,7 +14,6 @@ function Comments() {
     const newComment = {
       id: Date.now(),
       name: "Player", 
-      avatar: swoop1,
       text: comment,
       time:  Date.now(),
       likes: 0,
@@ -72,7 +71,7 @@ function formatTime(ts) {
               <div className="comment-list">
                 {comments.map((c) => (
                   <div className="comment-item">
-  <img src={c.avatar} alt="avatar" className="comment-avatar"/>
+  <img src={swoop1} alt="avatar" className="comment-avatar"/>
 
   <div className="comment-content">
       <div className="comment-header">

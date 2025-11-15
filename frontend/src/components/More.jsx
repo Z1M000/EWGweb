@@ -3,7 +3,7 @@ import '../component_styles/More.css';
 function More() {
   return (
     <div className = "outer-container">
-      <div className = "middle-container">
+      <div className = "middle-container information">
 
             <p className='point-value'> Learn More </p>
             <p className="game-summary">This site tracks the Emory Women’s Golf point system - players earn points from training and team actives. Milestones unlock rewards (prize) and a season goal </p>
