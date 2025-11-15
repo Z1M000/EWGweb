@@ -2,27 +2,31 @@ from pymongo import MongoClient
 import os
 from dotenv import load_dotenv
 from pprint import pprint
+from datetime import datetime
 
 load_dotenv()
 
 uri = os.getenv("URI")
 client = MongoClient(uri)
 db = client["Data"]
-
+db.drop_collection("Comments")
 # insert comments
 col = db["Comments"]
 print("connected to Comments col")
 comments = [
     {
-        "time": "09/06/2025 02:32 PM",
+        "name": "Coach",
+        "time": 1757194320000,   # 09/06/2025 02:32 PM
         "text": "Just a reminder that we earned 10 point for that drill earlier."
     },
     {
-        "time": "09/11/2025 09:18 AM",
+        "name": "Player",
+        "time": 1757572680000,   # 09/11/2025 09:18 AM
         "text": "I think one of the points from this round may have been missed."
     },
     {
-        "time": "09/15/2025 04:47 PM",
+        "name": "Player",
+        "time": 1757947620000,   # 09/15/2025 04:47 PM
         "text": "There should be an extra point for the play-day goal we completed."
     }
 ]
