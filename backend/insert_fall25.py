@@ -35,8 +35,9 @@ print("inserted sample comments")
 
 
 # insert activities
-# col = db["Activities"]
-# print("connected to Activity Col")
+db.drop_collection("Activities")
+col2 = db["Activities"]
+print("connected to Activity Col")
 
 # def create_activity(name, points, date):
 #     obj = {
@@ -76,12 +77,48 @@ print("inserted sample comments")
 #     "2025-10-14"
 # ]
 
-# activites = []
+activities = [
+    {
+        "name": "Team win",
+        "points": 100,
+        "date": 1757116800000
+    },
+    {
+        "name": "Team round under-par",
+        "points": 50,
+        "date": 1757808000000
+    },
+    {
+        "name": "Break scoring record",
+        "points": 100,
+        "date": 1758240000000
+    },
+    {
+        "name": "Even or under on par 5s",
+        "points": 25,
+        "date": 1758672000000
+    },
+    {
+        "name": "Play day goal - KP",
+        "points": 20,
+        "date": 1759104000000
+    },
+    {
+        "name": "Close-out Drill",
+        "points": 10,
+        "date": 1759507200000
+    },
+    {
+        "name": "Community service example",
+        "points": 50,
+        "date": 1760400000000
+    }
+]
 
 # for i in range(0, 6):
 #     activites.append(create_activity(names[i], points[i], dates[i]))
 
-# pprint(activites)
+pprint(activities)
 
-# col.insert_many(activites)
-# print("inserted sample activities")
+col2.insert_many(activities)
+print("inserted sample activities")

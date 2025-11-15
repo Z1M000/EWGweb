@@ -1,7 +1,7 @@
-import '../component_styles/AddActivity.css'
+import "../component_styles/AddActivity.css";
 import { useState } from "react";
 
-function AddActivity({ onAddActivity }) {
+function AddActivity({ onActivityAdded }) {
   const [activityName, setActivityName] = useState("");
   const [points, setPoints] = useState(0);
   const [showOptions, setShowOptions] = useState(false);
@@ -9,40 +9,48 @@ function AddActivity({ onAddActivity }) {
   const [date, setDate] = useState(today);
 
   const presetActivities = [
-    {name: "Team Win", points: 100},
-    {name: "Team Round Under-Par", points: 50},
-    {name: "Beat Scoring Record", points: 100},
-    {name: "Team Tournament Goal", points: 25},
-    {name: "Play day goal (per person per round)", points: 20},
-    {name: "Close-out Drills", points: 10},
-    {name: "Community Service", points: 50},
-    {name: "Team Top 5 in D1",  points: 50},
-    {name: "Ryder Cup (per person for winning a match)", points: 5}
-];
+    { name: "Team Win", points: 100 },
+    { name: "Team Round Under-Par", points: 50 },
+    { name: "Beat Scoring Record", points: 100 },
+    { name: "Team Tournament Goal", points: 25 },
+    { name: "Play day goal (per person per round)", points: 20 },
+    { name: "Close-out Drills", points: 10 },
+    { name: "Community Service", points: 50 },
+    { name: "Team Top 5 in D1", points: 50 },
+    { name: "Ryder Cup (per person for winning a match)", points: 5 },
+  ];
 
-const filteredOptions = presetActivities.filter((opt) =>
-  opt.name.toLowerCase().includes(activityName.toLowerCase())
-);
+  const filteredOptions = presetActivities.filter((opt) =>
+    opt.name.toLowerCase().includes(activityName.toLowerCase())
+  );
 
-  const handleSubmit = (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
 
     const newActivity = {
-      activityName,
+      name: activityName,
       points: Number(points),
-      date
+      date: new Date(date).getTime(),
     };
 
-    onAddActivity(newActivity);
+    await fetch("http://127.0.0.1:8000/activities", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newActivity),
+    });
+
+    if (onActivityAdded) {
+      onActivityAdded();
+    }
+
     setActivityName("");
     setPoints(0);
     setDate(today);
-  };
+  }
 
   return (
-        <div className="outer-container">
+    <div className="outer-container">
       <div className="middle-container add">
-
         <div className="points-container">
           <p className="point-value">Add Activity</p>
         </div>
@@ -59,33 +67,33 @@ const filteredOptions = presetActivities.filter((opt) =>
                     className="activity-input"
                     value={activityName}
                     onChange={(e) => {
-                        const value = e.target.value;
-                        setActivityName(value);
+                      const value = e.target.value;
+                      setActivityName(value);
 
-                        if (value.trim() === "") {
-                            setShowOptions(false);
-                        } else {
-                            setShowOptions(true);
-                        }
-                        }}
-                        onClick={() => {
-                        if (activityName === "") setShowOptions(true);
-                        }}
-                        required
-                        placeholder="Type or choose activity"
-                    />
+                      if (value.trim() === "") {
+                        setShowOptions(false);
+                      } else {
+                        setShowOptions(true);
+                      }
+                    }}
+                    onClick={() => {
+                      if (activityName === "") setShowOptions(true);
+                    }}
+                    required
+                    placeholder="Type or choose activity"
+                  />
 
                   {showOptions && filteredOptions.length > 0 && (
                     <div className="dropdown-options">
-                    {filteredOptions.map((opt, index) => (
+                      {filteredOptions.map((opt, index) => (
                         <div
-                        key={index}
-                        className="dropdown-option"
-                        onClick={() => {
+                          key={index}
+                          className="dropdown-option"
+                          onClick={() => {
                             setActivityName(opt.name);
                             setPoints(opt.points);
                             setShowOptions(false);
-                        }}
+                          }}
                         >
                           {opt.name} : {opt.points} pts
                         </div>
@@ -117,13 +125,13 @@ const filteredOptions = presetActivities.filter((opt) =>
               </div>
 
               <div className="add-button">
-                <button type="submit" className="add-btn">Add</button>
+                <button type="submit" className="add-btn">
+                  Add
+                </button>
               </div>
-
             </div>
           </form>
         </div>
-
       </div>
     </div>
   );
