@@ -41,11 +41,14 @@ function Progress({ reload }) {
   let remaining = totalPoints;
 
   return (
-    <div className="outer-container">
-      <div className="middle-container">
-        <div className="points-container">
-          <p className="point-value"> Progress </p>
+    <div className = "outer-container">
+      <div className = "middle-container">
+
+
+          <div className='points-container'>
+            <p className='point-value'> Progress </p>
         </div>
+
 
         <div className="table-container">
           <table className="progress-table">
@@ -75,9 +78,12 @@ function Progress({ reload }) {
             </tbody>
           </table>
         </div>
+
+
       </div>
     </div>
   );
 }
+
 
 export default Progress;
