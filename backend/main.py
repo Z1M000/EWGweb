@@ -10,9 +10,12 @@ load_dotenv()
 
 uri = os.getenv("URI")
 client = MongoClient(uri)
-db = client["Data"]        
+db = client["Data"]
+act_col = db["Activities"]  
+print("connected to activities col")      
 users_col = db["Users"]
 print("connected to user col")
+com_col = db["Comments"]
 
 
 # --- FastAPI app ---
@@ -32,6 +35,14 @@ class LoginRequest(BaseModel):
 class LoginResponse(BaseModel):
     username: str
 
+class Activity(BaseModel):
+    name: str
+    points: int
+    date: str
+
+class Comment(BaseModel):
+    time: str
+    text: str
 
 @app.post("/login")
 def login(request: LoginRequest):
@@ -47,4 +58,15 @@ def login(request: LoginRequest):
         username = request.username,
     )
     return response
-    
+
+@app.get("/activities")
+def get_activities():
+    print("frontend wants all activities")
+    acts = list(act_col.find({}, {"_id": 0}).sort("date", -1))
+    return acts
+
+@app.get("/comments")
+def get_comments():
+    print("frontend wants all comments")
+    comments = list(com_col.find({}, {"_id": 0}).sort("time", -1))
+    return comments
