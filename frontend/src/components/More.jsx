@@ -1,6 +1,14 @@
 function More() {
   return (
-    <h2>More Info</h2>
+    <div className = "outer-container">
+      <div className = "middle-container">
+
+          <div className='points-container'>
+            <p className='point-value'> Learn More </p>
+        </div>
+
+      </div>
+    </div>
   );
 }
 

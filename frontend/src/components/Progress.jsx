@@ -1,6 +1,14 @@
 function Progress() {
   return (
-    <h2>Progress</h2>
+    <div className = "outer-container">
+      <div className = "middle-container">
+
+          <div className='points-container'>
+            <p className='point-value'> Progress </p>
+        </div>
+
+      </div>
+    </div>
   );
 }
 
