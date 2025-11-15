@@ -8,20 +8,23 @@ load_dotenv()
 uri = os.getenv("URI")
 client = MongoClient(uri)
 db = client["Data"]
-
+db.drop_collection("Comments")
 # insert comments
 col = db["Comments"]
 print("connected to Comments col")
 comments = [
     {
+        "name": "Coach",
         "time": "09/06/2025 02:32 PM",
         "text": "Just a reminder that we earned 10 point for that drill earlier."
     },
     {
+        "name": "Player",
         "time": "09/11/2025 09:18 AM",
         "text": "I think one of the points from this round may have been missed."
     },
     {
+        "name": "Player",
         "time": "09/15/2025 04:47 PM",
         "text": "There should be an extra point for the play-day goal we completed."
     }

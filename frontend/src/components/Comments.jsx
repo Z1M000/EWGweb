@@ -1,28 +1,55 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../component_styles/Comments.css";
 // import swoop1 from "../components/swoop1.png";
 
 function Comments() {
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
+  const [error, setError] = useState("");
+  useEffect(function () {
+    loadComments();
+  }, []);
 
-  function handleSubmit(e) {
+  async function loadComments() {
+    try {
+      const uri = "http://127.0.0.1:8000/comments";
+      const res = await fetch(uri);
+      const data = await res.json();
+      setComments(data);
+      setError("");
+    } catch (err) {
+      setError("Error: " + err);
+    }
+  }
+
+  async function handleSubmit(e) {
     e.preventDefault();
 
     if (!comment.trim()) return;
 
     const newComment = {
-      id: Date.now(),
       name: "Player",
-      // avatar: swoop1,
       text: comment,
-      time: Date.now(),
-      likes: 0,
-      replies: [],
+      time: formatTime(Date.now()),
     };
 
-    setComments([newComment, ...comments]);
-    setComment("");
+    try {
+      const res = await fetch("http://127.0.0.1:8000/comments", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newComment),
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to save comment");
+      }
+
+      setComment("");
+      loadComments();
+    } catch (err) {
+      console.log(err);
+      setError("Error: " + err.message);
+    }
   }
 
   function formatTime(ts) {
@@ -74,7 +101,7 @@ function Comments() {
                 <div className="comment-content">
                   <div className="comment-header">
                     <p className="comment-name">{c.name}</p>
-                    <span className="comment-time">{formatTime(c.time)}</span>
+                    <span className="comment-time">{c.time}</span>
                   </div>
 
                   <p className="comment-text">{c.text}</p>

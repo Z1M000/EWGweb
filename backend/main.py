@@ -41,6 +41,7 @@ class Activity(BaseModel):
     date: str
 
 class Comment(BaseModel):
+    name: str
     time: str
     text: str
 
@@ -70,3 +71,9 @@ def get_comments():
     print("frontend wants all comments")
     comments = list(com_col.find({}, {"_id": 0}).sort("time", -1))
     return comments
+
+@app.post("/comments")
+def store_comment(com: Comment):
+    print("Storing comments to backend")
+    com_col.insert_one(com.dict())
+    return {"status": "success"}
