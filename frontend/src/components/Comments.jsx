@@ -29,8 +29,8 @@ function Comments() {
 
     const newComment = {
       name: "Player",
+      time: Date.now(),
       text: comment,
-      time: formatTime(Date.now()),
     };
 
     try {
@@ -101,7 +101,7 @@ function Comments() {
                 <div className="comment-content">
                   <div className="comment-header">
                     <p className="comment-name">{c.name}</p>
-                    <span className="comment-time">{c.time}</span>
+                    <span className="comment-time">{formatTime(c.time)}</span>
                   </div>
 
                   <p className="comment-text">{c.text}</p>

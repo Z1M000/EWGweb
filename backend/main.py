@@ -42,7 +42,7 @@ class Activity(BaseModel):
 
 class Comment(BaseModel):
     name: str
-    time: str
+    time: int
     text: str
 
 @app.post("/login")
