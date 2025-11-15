@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import "../component_styles/Comments.css";
-// import swoop1 from "../components/swoop1.png";
 
 function Comments() {
   const [comment, setComment] = useState("");
@@ -96,7 +95,7 @@ function Comments() {
           <div className="comment-list">
             {comments.map((c) => (
               <div className="comment-item">
-                <img src={c.avatar} alt="avatar" className="comment-avatar" />
+                <img src="/images/swoop.png" alt="avatar" className="comment-avatar" />
 
                 <div className="comment-content">
                   <div className="comment-header">
