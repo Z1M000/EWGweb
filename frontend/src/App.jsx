@@ -7,25 +7,21 @@ import Header from './components/Header';
 import Border from './components/Border';
 import Comments from './components/Comments';
 import Footer from './components/Footer';
+import AddActivity from './components/AddActivity';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./components/Home";
+import Login from './components/Login';
 
 function App() {
   return (
-    <div className="App">
-      <Header></Header>
+     <Router>
+      <Header />
 
-      <div className="page-container">
-          <Roadmap> </Roadmap>
-      </div>
-
-      <Border></Border>
-
-      <div className="page-container">
-        <Progress></Progress>
-        <Comments></Comments>
-        <More></More>
-      </div>
-      <Footer></Footer>
-    </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </Router>
   );
 }
 
