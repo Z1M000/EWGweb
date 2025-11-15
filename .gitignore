@@ -1,0 +1,4 @@
+backend/.env
+frontend_zimo/
+backend/debug.py
+__pycache__/
