@@ -1,8 +1,10 @@
-import '../component_styles/Border.css'
+import '../component_styles/Footer.css'
 
 function Footer() {
   return (
-    <div className="border"></div>
+    <footer className="socials">
+        <p>Our Socials</p>
+    </footer>
   );
 }
 
