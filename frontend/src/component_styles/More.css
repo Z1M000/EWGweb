@@ -1,0 +1,16 @@
+.game-summary{
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.nav-link{
+    font-size: 1.25rem;
+    text-decoration: none; 
+    font-weight: bold;
+    color: #002878;
+}
+
+.nav-link:hover{
+    font-weight: bolder;
+    color:#d28e00;
+}
