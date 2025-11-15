@@ -12,9 +12,12 @@ col2 = db["Activities"]
 col3 = db["Comments"]
 print("connected to all collections")
 
-test_data = {
-    "message": "this is the test data"
-}
+users = [
+    {"username": "coach", "password": "coachpassword"},
+    {"username": "player", "password": "playerpassword"}
+]
+col1.insert_many(users)
+print("inserted two users")
 
 # col1.insert_one(test_data)
 # col2.insert_one(test_data)

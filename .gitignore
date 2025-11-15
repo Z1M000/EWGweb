@@ -1,2 +1,7 @@
 backend/.env
 frontend/
+!frontend/src/components/AuthPage.jsx
+!frontend/src/component_styles/AuthPage.css
+!frontend/src/App.jsx
+backend/debug.py
+__pycache__/
