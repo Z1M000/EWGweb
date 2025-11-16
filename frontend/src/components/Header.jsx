@@ -8,7 +8,7 @@ function Header({ user, onLogout }) {
         <div className="brand">
           <div className="logo-circle">E</div>
           <div className="site-title">
-            Emory Women&apos;s Golf Points Website
+            Emory Women&apos;s Golf Points Game Website
           </div>
         </div>
 

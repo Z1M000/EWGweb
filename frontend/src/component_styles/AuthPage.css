@@ -48,7 +48,7 @@
   border: 1px solid #ddd;
   font-size: 0.95rem;
   outline: none;
-  width: 350px;
+  width: 368px;
 }
 
 .auth-input:focus {
@@ -69,7 +69,7 @@
   font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
-  background: #2563eb;
+  background: #002878db;
   color: white;
 }
 
