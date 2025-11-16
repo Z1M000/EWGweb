@@ -8,11 +8,14 @@ import Footer from "./Footer";
 import "../component_styles/Home.css";
 import { useState } from "react";
 
-function Home() {
+function Home({ user }) {
   const [reloadActivities, setReloadActivities] = useState(false);
 
+  const isLoggedIn = !!user;
+  const isCoach = user?.role === "coach";
+  const isPlayer = user?.role === "player";
+
   function handleActivityAdded() {
-    // 每次 Add 成功之后，翻转一下布尔值
     setReloadActivities((prev) => !prev);
   }
 
@@ -20,13 +23,23 @@ function Home() {
     <div className="page-container">
       <Roadmap />
       <Border />
-      <div className="page-container">
-        <Progress reload={reloadActivities} />
-        <AddActivity onActivityAdded={handleActivityAdded} />
-        <Comments />
-        <More />
-        <Footer />
-      </div>
+      <Progress />
+
+      {user?.role === "coach" && (
+        <>
+          <AddActivity />
+        </>
+      )}
+
+      {(user?.role === "player" || user?.role === "coach") && (
+        <>
+          <Comments />
+        </>
+      )}
+
+      <More />
+      <Footer />
+
     </div>
   );
 }

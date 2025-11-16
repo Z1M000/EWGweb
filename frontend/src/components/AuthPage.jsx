@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../component_styles/AuthPage.css";
+import { useRole } from "../components/RoleProvider";
 
 const backend_uri = "http://127.0.0.1:8000";
 
@@ -9,6 +10,8 @@ function AuthPage({ onLogin }) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const { loginAsPlayer, loginAsCoach } = useRole();
+  
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -34,7 +37,11 @@ function AuthPage({ onLogin }) {
         return;
       }
 
-      onLogin({ username: data.username });
+      onLogin({ username: data.username, role: data.role });
+
+       if (data.role === "coach") loginAsCoach();
+      else loginAsPlayer();
+
       navigate("/");
     } catch (err) {
       setError("Error: " + err);
