@@ -20,3 +20,8 @@ td, th {
 tr:nth-child(even) {
   background-color: #e8d585;
 }
+
+.actions-cell {
+  text-align: right;       /* Move content to right */
+  padding-right: 16px;     /* Add spacing from edge */
+}

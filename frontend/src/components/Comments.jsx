@@ -55,6 +55,14 @@ function Comments() {
     }
   }
 
+  async function deleteComment(id) {
+  await fetch(`http://127.0.0.1:8000/comments/${id}`, {
+    method: "DELETE",
+  });
+
+  loadComments(); // refresh
+}
+
   function formatTime(ts) {
     const d = new Date(ts);
 
@@ -99,16 +107,20 @@ function Comments() {
 
           <div className="comment-list">
             {comments.map((c) => (
-              <div className="comment-item">
-                <img src="/images/swoop.png" alt="avatar" className="comment-avatar" />
+          <div className="comment-item" key={c._id}>
+            <img src="/images/swoop.png" alt="avatar" className="comment-avatar" />
 
-                <div className="comment-content">
-                  <div className="comment-header">
-                    <p className="comment-name">{c.role}</p>
-                    <span className="comment-time">{formatTime(c.time)}</span>
-                  </div>
+            <div className="comment-content">
+              <div className="comment-header">
+                <p className="comment-name">{c.role}</p>
+                <span className="comment-time">{formatTime(c.time)}</span>
+              </div>
 
-                  <p className="comment-text">{c.text}</p>
+              <p className="comment-text">{c.text}</p>
+
+              <button className="delete-btn" onClick={() => deleteComment(c._id)}>
+                🗑 Delete
+              </button>
                 </div>
               </div>
             ))}

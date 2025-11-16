@@ -2,7 +2,6 @@ import "../component_styles/Progress.css";
 import { useState, useEffect } from "react";
 
 function Progress({ reload, onTotalPointsChange, user  }) {
-  console.log("Progress user:", user);
   const [activities, setActivities] = useState([]);
   const [totalPoints, setTotalPoints] = useState(0);
   const [error, setError] = useState("");
