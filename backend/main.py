@@ -34,6 +34,7 @@ class LoginRequest(BaseModel):
 
 class LoginResponse(BaseModel):
     username: str
+    role: str
 
 class Activity(BaseModel):
     name: str
@@ -62,6 +63,7 @@ def login(request: LoginRequest):
 
     response = LoginResponse(
         username = request.username,
+        role=user.get("role")
     )
     return response
 

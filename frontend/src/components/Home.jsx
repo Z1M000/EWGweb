@@ -8,9 +8,13 @@ import More from "./More";
 import Footer from "./Footer";
 import "../component_styles/Home.css";
 
-function Home() {
+function Home({ user }) {
   const [reloadActivities, setReloadActivities] = useState(false);
   const [totalPoints, setTotalPoints] = useState(0);
+
+  const isLoggedIn = !!user;
+  const isCoach = user?.role === "coach";
+  const isPlayer = user?.role === "player";
 
   function handleActivityAdded() {
     setReloadActivities(function (prev) {
@@ -26,6 +30,23 @@ function Home() {
     <div className="page-container">
       <Roadmap totalPoints={totalPoints} />
       <Border />
+      <Progress />
+
+      {user?.role === "coach" && (
+        <>
+          <AddActivity />
+        </>
+      )}
+
+      {(user?.role === "player" || user?.role === "coach") && (
+        <>
+          <Comments />
+        </>
+      )}
+
+      <More />
+      <Footer />
+
       <div className="page-container">
         <Progress
           reload={reloadActivities}

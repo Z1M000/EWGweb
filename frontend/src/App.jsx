@@ -13,6 +13,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import AuthPage from "./components/AuthPage";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -22,14 +23,25 @@ function App() {
   }
 
   return (
-    <Router>
-      <Header user={user} onLogout={handleLogout} />
+     <Router>
+      <Header user={user} onLogout={() => setUser(null)} />
+
       <Routes>
-        <Route
-          path="/"
-          element={<Home user={user} onLogout={handleLogout} />}
+
+      <Route path="/" element={<Home user={user} />} />
+
+      {/* Login page */}
+      <Route path="/login" element={<AuthPage onLogin={setUser} />} />
+
+      {/* Example private page */}
+      <Route
+        path="/activities"
+        element={
+          <ProtectedRoute user={user}>
+          </ProtectedRoute>
+        }
         />
-        <Route path="/login" element={<AuthPage onLogin={setUser} />} />
+
       </Routes>
     </Router>
   );
