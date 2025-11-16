@@ -24,7 +24,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins = ["https://ewgweb.onrender.com, https://ewg-web1.vercel.app/"],
+    allow_origins = ["https://ewgweb.onrender.com, https://ewg-web1-a8kmquzvk-katie-parks-projects.vercel.app"],
     allow_methods = ["*"],
     allow_headers = ["*"],
 )
