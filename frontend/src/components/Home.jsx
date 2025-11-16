@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Roadmap from "./Roadmap";
 import Border from "./Border";
 import Progress from "./Progress";
@@ -6,22 +7,28 @@ import Comments from "./Comments";
 import More from "./More";
 import Footer from "./Footer";
 import "../component_styles/Home.css";
-import { useState } from "react";
 
 function Home({ user }) {
   const [reloadActivities, setReloadActivities] = useState(false);
+  const [totalPoints, setTotalPoints] = useState(0);
 
   const isLoggedIn = !!user;
   const isCoach = user?.role === "coach";
   const isPlayer = user?.role === "player";
 
   function handleActivityAdded() {
-    setReloadActivities((prev) => !prev);
+    setReloadActivities(function (prev) {
+      return !prev;
+    });
+  }
+
+  function handleTotalPointsChange(tp) {
+    setTotalPoints(tp);
   }
 
   return (
     <div className="page-container">
-      <Roadmap />
+      <Roadmap totalPoints={totalPoints} />
       <Border />
       <Progress />
 
@@ -40,6 +47,16 @@ function Home({ user }) {
       <More />
       <Footer />
 
+      <div className="page-container">
+        <Progress
+          reload={reloadActivities}
+          onTotalPointsChange={handleTotalPointsChange}
+        />
+        <AddActivity onActivityAdded={handleActivityAdded} />
+        <Comments />
+        <More />
+        <Footer />
+      </div>
     </div>
   );
 }

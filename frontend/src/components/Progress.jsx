@@ -1,7 +1,7 @@
 import "../component_styles/Progress.css";
 import { useState, useEffect } from "react";
 
-function Progress({ reload }) {
+function Progress({ reload, onTotalPointsChange }) {
   const [activities, setActivities] = useState([]);
   const [totalPoints, setTotalPoints] = useState(0);
   const [error, setError] = useState("");
@@ -25,6 +25,9 @@ function Progress({ reload }) {
       }
 
       setTotalPoints(sum);
+      if (onTotalPointsChange) {
+        onTotalPointsChange(sum);
+      }
       setActivities(data);
       setError("");
     } catch (err) {
@@ -41,14 +44,11 @@ function Progress({ reload }) {
   let remaining = totalPoints;
 
   return (
-    <div className = "outer-container">
-      <div className = "middle-container">
-
-
-          <div className='points-container'>
-            <p className='point-value'> Progress </p>
+    <div className="outer-container">
+      <div className="middle-container">
+        <div className="points-container">
+          <p className="point-value"> Progress </p>
         </div>
-
 
         <div className="table-container">
           <table className="progress-table">
@@ -78,12 +78,9 @@ function Progress({ reload }) {
             </tbody>
           </table>
         </div>
-
-
       </div>
     </div>
   );
 }
-
 
 export default Progress;

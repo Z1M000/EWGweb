@@ -5,7 +5,7 @@ function AddActivity({ onActivityAdded }) {
   const [activityName, setActivityName] = useState("");
   const [points, setPoints] = useState(0);
   const [showOptions, setShowOptions] = useState(false);
-  const today = new Date().toISOString().split("T")[0];
+  const today = new Date().toLocaleDateString("en-CA");
   const [date, setDate] = useState(today);
 
   const presetActivities = [
