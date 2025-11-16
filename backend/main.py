@@ -89,7 +89,7 @@ def delete_activity(id: str):
 @app.get("/comments")
 def get_comments():
     comments = []
-    for c in com_col.find({}).sort("date", -1):
+    for c in com_col.find({}).sort("time", -1):
         c["_id"] = str(c["_id"])
         comments.append(c)
     return comments
