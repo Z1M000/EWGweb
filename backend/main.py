@@ -69,7 +69,7 @@ def get_activities():
     print("frontend wants all activities")
     acts = []
     for a in act_col.find({}).sort("date", -1):
-        a["_id"] = str(a["_id"])  # convert ObjectId → string
+        a["_id"] = str(a["_id"])
         acts.append(a)
     return acts
 
@@ -90,7 +90,7 @@ def delete_activity(id: str):
 def get_comments():
     comments = []
     for c in com_col.find({}).sort("date", -1):
-        c["_id"] = str(c["_id"])  # convert ObjectId → string
+        c["_id"] = str(c["_id"])
         comments.append(c)
     return comments
 

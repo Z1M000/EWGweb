@@ -32,10 +32,16 @@ function AuthPage({ onLogin }) {
 
       const data = await res.json();
 
+      
+
       if (!res.ok) {
         setError("Invalid username or password");
         return;
       }
+
+      const now = Date.now();
+      localStorage.setItem("user", JSON.stringify(data));
+      localStorage.setItem("loginTime", now.toString());
 
       onLogin({ username: data.username, role: data.role });
 
