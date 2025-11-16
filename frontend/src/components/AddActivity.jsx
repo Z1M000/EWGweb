@@ -13,11 +13,11 @@ function AddActivity({ onActivityAdded }) {
     { name: "Team Round Under-Par", points: 50 },
     { name: "Beat Scoring Record", points: 100 },
     { name: "Team Tournament Goal", points: 25 },
-    { name: "Play day goal (per person per round)", points: 20 },
+    { name: "Play day goal", points: 20 },
     { name: "Close-out Drills", points: 10 },
     { name: "Community Service", points: 50 },
     { name: "Team Top 5 in D1", points: 50 },
-    { name: "Ryder Cup (per person for winning a match)", points: 5 },
+    { name: "Ryder Cup", points: 5 },
   ];
 
   const filteredOptions = presetActivities.filter((opt) =>
