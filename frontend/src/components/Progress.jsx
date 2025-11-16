@@ -1,7 +1,7 @@
 import "../component_styles/Progress.css";
 import { useState, useEffect } from "react";
 
-function Progress({ reload, onTotalPointsChange, user  }) {
+function Progress({ reload, onTotalPointsChange, user }) {
   const [activities, setActivities] = useState([]);
   const [totalPoints, setTotalPoints] = useState(0);
   const [error, setError] = useState("");
@@ -42,14 +42,14 @@ function Progress({ reload, onTotalPointsChange, user  }) {
   }
 
   async function deleteActivity(id) {
-  console.log("Deleting _id:", id);
+    console.log("Deleting _id:", id);
 
-  await fetch(`http://127.0.0.1:8000/activities/${id}`, {
-    method: "DELETE",
-  });
+    await fetch(`http://127.0.0.1:8000/activities/${id}`, {
+      method: "DELETE",
+    });
 
-  loadActivities();
-}
+    loadActivities();
+  }
 
   let remaining = totalPoints;
 
@@ -63,7 +63,7 @@ function Progress({ reload, onTotalPointsChange, user  }) {
         <div className="table-container">
           <table className="progress-table">
             <thead>
-              <tr>
+              <tr className="labels">
                 <th>Activity</th>
                 <th>Points</th>
                 <th>Total after</th>
@@ -93,7 +93,6 @@ function Progress({ reload, onTotalPointsChange, user  }) {
                         </button>
                       )}
                     </td>
-
                   </tr>
                 );
               })}

@@ -4,17 +4,25 @@
   width: 100%;
 }
 
-td, th {
+td,
+th {
   text-align: left;
   padding: 8px;
 }
 
-.table-headers{
-    font-weight: bold;
+.table-headers {
+  font-weight: bold;
 }
 
-.table-data{
-    border: 1px solid #dddddd;
+.table-data {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  border: 1px solid #dddddd;
+}
+.labels {
+  text-transform: uppercase;
+  font-size: 17px;
 }
 
 tr:nth-child(even) {
@@ -22,6 +30,6 @@ tr:nth-child(even) {
 }
 
 .actions-cell {
-  text-align: right;       /* Move content to right */
-  padding-right: 16px;     /* Add spacing from edge */
+  text-align: right; /* Move content to right */
+  padding-right: 16px; /* Add spacing from edge */
 }
