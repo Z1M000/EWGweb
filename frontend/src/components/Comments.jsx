@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import "../component_styles/Comments.css";
+import { useRole } from "./RoleProvider";
 
 function Comments() {
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
   const [error, setError] = useState("");
+  const { role } = useRole();  
+
   useEffect(function () {
     loadComments();
   }, []);
@@ -27,7 +30,8 @@ function Comments() {
     if (!comment.trim()) return;
 
     const newComment = {
-      name: "Player",
+      name: role,
+      role: role,  
       time: Date.now(),
       text: comment,
     };
@@ -100,7 +104,7 @@ function Comments() {
 
                 <div className="comment-content">
                   <div className="comment-header">
-                    <p className="comment-name">{c.name}</p>
+                    <p className="comment-name">{c.role}</p>
                     <span className="comment-time">{formatTime(c.time)}</span>
                   </div>
 

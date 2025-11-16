@@ -30,11 +30,14 @@ function Home({ user }) {
     <div className="page-container">
       <Roadmap totalPoints={totalPoints} />
       <Border />
-      <Progress />
+      <Progress
+          reload={reloadActivities}
+          onTotalPointsChange={handleTotalPointsChange}
+        />
 
       {user?.role === "coach" && (
         <>
-          <AddActivity />
+          <AddActivity onActivityAdded={handleActivityAdded} />
         </>
       )}
 
@@ -46,17 +49,6 @@ function Home({ user }) {
 
       <More />
       <Footer />
-
-      <div className="page-container">
-        <Progress
-          reload={reloadActivities}
-          onTotalPointsChange={handleTotalPointsChange}
-        />
-        <AddActivity onActivityAdded={handleActivityAdded} />
-        <Comments />
-        <More />
-        <Footer />
-      </div>
     </div>
   );
 }
