@@ -18,19 +18,18 @@
   background: white;
   padding: 0;
   border-radius: 20px;
-  overflow: hidden;
-  margin-bottom: 20px;
+  overflow: hidden;     
 }
 
 .comment-input {
-  width: 100%;
-  height: 90px;
-  padding: 20px;
-  border: none;
-  outline: none;
-  resize: none;
-  background: white;
-  font-size: 1rem;
+    width: 100%;
+    height: 10px;
+    padding: 20px;
+    border: none;
+    outline: none;
+    resize: none;
+    background: white;
+    font-size: 1rem;
 }
 
 .comment-toolbar {
@@ -46,8 +45,8 @@
 }
 
 .comment-button {
-  align-self: flex-end;
-  background: #d47a33;
+  align-self: flex-end;  
+  background: #002878;
   border: none;
   padding: 10px 25px;
   border-radius: 30px;
@@ -118,80 +117,6 @@
   word-break: break-word;
   align-items: flex-start;
 }
-
-.reply-button {
-  background: none;
-  border: none;
-  color: #6a8edc;
-  font-size: 0.9rem;
-  font-weight: 500;
-  cursor: pointer;
-  padding: 0;
-  margin-top: 6px;
-}
-
-.reply-button:hover {
-  text-decoration: underline;
-}
-
-.reply-box {
-  margin-left: 50px;
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.reply-input {
-  width: 100%;
-  height: 60px;
-  padding: 10px;
-  border-radius: 10px;
-  background: #ededed;
-  border: 1px solid #ccc;
-  resize: none;
-  font-size: 0.9rem;
-  outline: none;
-}
-
-.reply-input:focus {
-  border-color: #6a9cf5;
-  box-shadow: 0 0 4px rgba(106, 156, 245, 0.5);
-}
-
-.reply-submit {
-  align-self: flex-end;
-  background: #d47a33;
-  color: white;
-  padding: 6px 18px;
-  border-radius: 20px;
-  border: none;
-  cursor: pointer;
-  font-size: 0.9rem;
-  font-weight: 600;
-}
-
-.reply-submit:hover {
-  background: #c86c30;
-}
-
-.replies-list {
-  margin-left: 50px;
-  margin-top: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.reply-item {
-  background: #f5f5f5;
-  border-radius: 12px;
-  padding: 12px 14px;
-  display: flex;
-  gap: 12px;
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.06);
-}
-
 .delete-btn {
   background: transparent;
   color: black;

@@ -3,23 +3,21 @@
   background: #ffffff;
   padding: 25px;
   border-radius: 12px;
-  width: 50%;
+  width: 95%;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
-.add-activity-form {
-  width: 100%;
-}
-.add{
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
+
+
 .form-row {
   display: flex;
   align-items: flex-start; 
   gap: 25px;
   flex-wrap: wrap;
+}
+
+.add-button {
+  margin-left: auto;
 }
 
 .form-group {
@@ -73,6 +71,7 @@
   display: flex;
   align-items: flex-start; 
   padding-top: 29px;  
+  
 }
 
 .add-btn {
