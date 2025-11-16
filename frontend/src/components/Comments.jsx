@@ -12,9 +12,14 @@ function Comments() {
     loadComments();
   }, []);
 
+  const backend_uri =
+  window.location.hostname === "localhost"
+    ? "http://127.0.0.1:8000"
+    : "https://ewgweb.onrender.com";
+
   async function loadComments() {
     try {
-      const uri = "https://ewgweb.onrender.com/comments";
+      const uri = backend_uri + "/comments";
       const res = await fetch(uri);
       const data = await res.json();
       setComments(data);
@@ -37,7 +42,7 @@ function Comments() {
     };
 
     try {
-      const res = await fetch("https://ewgweb.onrender.com/comments", {
+      const res = await fetch( backend_uri + "/comments", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newComment),
@@ -56,7 +61,7 @@ function Comments() {
   }
 
   async function deleteComment(id) {
-  await fetch(`https://ewgweb.onrender.com/comments/${id}`, {
+  await fetch(backend_uri + `/comments/${id}`, {
     method: "DELETE",
   });
 

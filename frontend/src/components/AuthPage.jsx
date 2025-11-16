@@ -3,8 +3,11 @@ import { useNavigate } from "react-router-dom";
 import "../component_styles/AuthPage.css";
 import { useRole } from "../components/RoleProvider";
 
-const backend_uri = "https://ewgweb.onrender.com";
-
+  const backend_uri =
+  window.location.hostname === "localhost"
+    ? "http://127.0.0.1:8000"
+    : "https://ewgweb.onrender.com";
+    
 function AuthPage({ onLogin }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -23,7 +26,7 @@ function AuthPage({ onLogin }) {
     }
 
     try {
-      let uri = "https://ewgweb.onrender.com/login";
+      let uri = backend_uri + "/login";
       const res = await fetch(uri, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

@@ -27,6 +27,9 @@ app.add_middleware(
     allow_origins = [
     "https://ewgweb.onrender.com",
     "https://ewg-web1.vercel.app",
+    "http://127.0.0.1:8000",
+    "http://localhost:3000"
+
 ],
     allow_methods = ["*"],
     allow_headers = ["*"],
