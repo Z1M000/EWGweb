@@ -23,6 +23,12 @@ function AddActivity({ onActivityAdded }) {
   const filteredOptions = presetActivities.filter((opt) =>
     opt.name.toLowerCase().includes(activityName.toLowerCase())
   );
+  
+  const backend_uri =
+  window.location.hostname === "localhost"
+    ? "http://127.0.0.1:8000"
+    : "https://ewgweb.onrender.com";
+
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -33,7 +39,7 @@ function AddActivity({ onActivityAdded }) {
       date: new Date(date).getTime(),
     };
 
-    await fetch("https://ewgweb.onrender.com/activities", {
+    await fetch(backend_uri + "/activities", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newActivity),

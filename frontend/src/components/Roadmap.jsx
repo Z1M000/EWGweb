@@ -10,15 +10,22 @@ function Roadmap({ totalPoints }) {
     { value: 850, label: "Pottery Party" },
   ];
 
+   function clamp(num, min, max) {
+  return Math.max(min, Math.min(num, max));
+}
+
+  let percentFilled = (totalPoints / maxPoints) * 100;
+  percentFilled = clamp(percentFilled, 0, 100);
+
+
   const milestonePercents = goals.map(function (g) {
     return {
       ...g,
-      percent: (g.value / maxPoints) * 100,
+      percent: clamp((g.value / maxPoints) * 100, 0, 100),
     };
   });
 
-  const percentFilled = (totalPoints / maxPoints) * 100;
-
+ 
   return (
     <div className="outer-container">
       <div className="middle-container">

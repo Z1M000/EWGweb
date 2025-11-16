@@ -13,9 +13,15 @@ function Progress({ reload, onTotalPointsChange, user }) {
     [reload]
   );
 
+  const backend_uri =
+  window.location.hostname === "localhost"
+    ? "http://127.0.0.1:8000"
+    : "https://ewgweb.onrender.com";
+
+
   async function loadActivities() {
     try {
-      const uri = "https://ewgweb.onrender.com/activities";
+      const uri = backend_uri + "/activities";
       const res = await fetch(uri);
       const data = await res.json();
 
@@ -44,7 +50,7 @@ function Progress({ reload, onTotalPointsChange, user }) {
   async function deleteActivity(id) {
     console.log("Deleting _id:", id);
 
-    await fetch(`https://ewgweb.onrender.com/activities/${id}`, {
+    await fetch(backend_uri + `/activities/${id}`, {
       method: "DELETE",
     });
 
