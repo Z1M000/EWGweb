@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "../component_styles/AuthPage.css";
 import { useRole } from "../components/RoleProvider";
 
-const backend_uri = "http://127.0.0.1:8000";
+const backend_uri = "https://ewgweb.onrender.com/";
 
 function AuthPage({ onLogin }) {
   const [username, setUsername] = useState("");
