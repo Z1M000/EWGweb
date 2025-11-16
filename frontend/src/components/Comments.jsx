@@ -14,7 +14,7 @@ function Comments() {
 
   async function loadComments() {
     try {
-      const uri = "http://127.0.0.1:8000/comments";
+      const uri = "https://ewgweb.onrender.com/comments";
       const res = await fetch(uri);
       const data = await res.json();
       setComments(data);
@@ -37,7 +37,7 @@ function Comments() {
     };
 
     try {
-      const res = await fetch("http://127.0.0.1:8000/comments", {
+      const res = await fetch("https://ewgweb.onrender.com/comments", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newComment),
@@ -56,7 +56,7 @@ function Comments() {
   }
 
   async function deleteComment(id) {
-  await fetch(`http://127.0.0.1:8000/comments/${id}`, {
+  await fetch(`https://ewgweb.onrender.com/comments/${id}`, {
     method: "DELETE",
   });
 
