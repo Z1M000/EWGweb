@@ -4,24 +4,33 @@ import { Link } from "react-router-dom";
 function Header({ user, onLogout }) {
   return (
     <header className="header">
-      <h1>Emory Womens Golf Points Website</h1>
-      <nav>
-        <Link to="/">
-          <button className="login-button">Home</button>
-        </Link>
-        {user ? (
-          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-            <button className="login-button" onClick={onLogout}>
-              Logout
-            </button>
-            <h1 style={{ textAlign: "center" }}>Welcome, {user.username}!</h1>
+      <div className="header-inner">
+        <div className="brand">
+          <div className="logo-circle">E</div>
+          <div className="site-title">
+            Emory Women&apos;s Golf Points Website
           </div>
-        ) : (
-          <Link to="/login">
-            <button className="login-button">Login</button>
+        </div>
+
+        <nav className="nav-buttons">
+          {user ? (
+            <div className="user-box">
+              <span className="site-title">Welcome, {user.username}!</span>
+              <button className="login-button" onClick={onLogout}>
+                Logout
+              </button>
+            </div>
+          ) : (
+            <Link to="/login">
+              <button className="login-button">Login</button>
+            </Link>
+          )}
+
+          <Link to="/">
+            <button className="login-button">Home</button>
           </Link>
-        )}
-      </nav>
+        </nav>
+      </div>
     </header>
   );
 }

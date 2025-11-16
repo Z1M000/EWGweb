@@ -1,21 +1,37 @@
-.information{
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+.information {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
-.game-summary{
-    font-size: 1.25rem;
-    font-weight: 600;
-}
-
-.nav-link{
-    font-size: 1.25rem;
-    text-decoration: none; 
-    font-weight: bold;
-    color: #002878;
+.game-summary {
+  font-size: 1.25rem;
+  text-align: left;
 }
 
-.nav-link:hover{
-    font-weight: bolder;
-    color:#d28e00;
+.nav-link {
+  font-size: 1.25rem;
+  text-decoration: none;
+  color: #002878;
+  text-align: left;
+}
+
+.nav-link:hover {
+  color: #d28e00;
+}
+
+.info-list {
+  padding-left: 20px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.more-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  padding: 10px;
 }

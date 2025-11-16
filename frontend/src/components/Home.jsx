@@ -29,11 +29,11 @@ function Home({ user }) {
   return (
     <div className="page-container">
       <Roadmap totalPoints={totalPoints} />
-      <Border />
+      {/* <Border /> */}
       <Progress
-          reload={reloadActivities}
-          onTotalPointsChange={handleTotalPointsChange}
-        />
+        reload={reloadActivities}
+        onTotalPointsChange={handleTotalPointsChange}
+      />
 
       {user?.role === "coach" && (
         <>

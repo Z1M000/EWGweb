@@ -23,8 +23,10 @@ function Roadmap({ totalPoints }) {
     <div className="outer-container">
       <div className="middle-container">
         <div className="points-container">
-          <p className="point-value">{totalPoints} Points</p>
-          <p className="total-points">Total Points</p>
+          {/* <p className="point-value"> Roadmap </p> */}
+          <p className="total-points">TOTAL POINTS</p>
+          <p className="point-value">{totalPoints}</p>
+          <p className="total-points">Fall 2025 Goal: 850 pts</p>
         </div>
         <div className="progress-wrapper">
           <div className="progress-bar">
