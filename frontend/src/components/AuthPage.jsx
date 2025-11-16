@@ -23,7 +23,7 @@ function AuthPage({ onLogin }) {
     }
 
     try {
-      let uri = backend_uri + "/login";
+      let uri = "https://ewgweb.onrender.com/login";
       const res = await fetch(uri, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
