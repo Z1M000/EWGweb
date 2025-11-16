@@ -46,7 +46,7 @@ function Roadmap({ totalPoints }) {
                   style={{ left: `${m.percent}%` }}
                 >
                   {achieved && <span className="checkmark">✔</span>}
-                  {isLast && <div className="flag">🚩</div>}
+                  {isLast && <div className="flag">⛳</div>}
                 </div>
               );
             })}
