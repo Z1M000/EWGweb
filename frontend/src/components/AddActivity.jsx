@@ -33,7 +33,7 @@ function AddActivity({ onActivityAdded }) {
       date: new Date(date).getTime(),
     };
 
-    await fetch("https://ewgweb.onrender.com/", {
+    await fetch("https://ewgweb.onrender.com/activities", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newActivity),

@@ -4,7 +4,6 @@ function More() {
   return (
     <div className="outer-container">
       <div className="middle-container">
-        {/* ⭐ 加一个只在这个组件使用的 wrapper，保证不会影响别人 */}
         <div className="more-wrapper">
           <p className="point-value">Learn More</p>
 
