@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Roadmap from "./Roadmap";
 import Border from "./Border";
 import Progress from "./Progress";
@@ -6,22 +7,30 @@ import Comments from "./Comments";
 import More from "./More";
 import Footer from "./Footer";
 import "../component_styles/Home.css";
-import { useState } from "react";
 
 function Home() {
   const [reloadActivities, setReloadActivities] = useState(false);
+  const [totalPoints, setTotalPoints] = useState(0);
 
   function handleActivityAdded() {
-    // 每次 Add 成功之后，翻转一下布尔值
-    setReloadActivities((prev) => !prev);
+    setReloadActivities(function (prev) {
+      return !prev;
+    });
+  }
+
+  function handleTotalPointsChange(tp) {
+    setTotalPoints(tp);
   }
 
   return (
     <div className="page-container">
-      <Roadmap />
+      <Roadmap totalPoints={totalPoints} />
       <Border />
       <div className="page-container">
-        <Progress reload={reloadActivities} />
+        <Progress
+          reload={reloadActivities}
+          onTotalPointsChange={handleTotalPointsChange}
+        />
         <AddActivity onActivityAdded={handleActivityAdded} />
         <Comments />
         <More />
