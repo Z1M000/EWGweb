@@ -108,12 +108,15 @@
 }
 
 .comment-text {
+  display: flex;
+  flex-direction: column;
   margin-top: 6px;
   line-height: 1.4;
   color: #333;
   font-size: 1rem;
   white-space: pre-wrap;
   word-break: break-word;
+  align-items: flex-start;
 }
 
 .reply-button {

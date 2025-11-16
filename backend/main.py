@@ -43,6 +43,7 @@ class Activity(BaseModel):
 
 class Comment(BaseModel):
     name: str
+    role: str
     time: int
     text: str
 
