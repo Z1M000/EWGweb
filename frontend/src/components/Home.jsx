@@ -31,9 +31,10 @@ function Home({ user }) {
       <Roadmap totalPoints={totalPoints} />
       {/* <Border /> */}
       <Progress
-        reload={reloadActivities}
-        onTotalPointsChange={handleTotalPointsChange}
-      />
+          user={user}
+          reload={reloadActivities}
+          onTotalPointsChange={handleTotalPointsChange}
+        />
 
       {user?.role === "coach" && (
         <>

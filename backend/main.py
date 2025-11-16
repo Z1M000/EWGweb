@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from pymongo import MongoClient
 from dotenv import load_dotenv
+from bson import ObjectId
 import os
 
 load_dotenv()
@@ -36,11 +37,6 @@ class LoginResponse(BaseModel):
     username: str
     role: str
 
-class Activity(BaseModel):
-    name: str
-    points: int
-    date: str
-
 class Comment(BaseModel):
     name: str
     role: str
@@ -71,7 +67,10 @@ def login(request: LoginRequest):
 @app.get("/activities")
 def get_activities():
     print("frontend wants all activities")
-    acts = list(act_col.find({}, {"_id": 0}).sort("date", -1))
+    acts = []
+    for a in act_col.find({}).sort("date", -1):
+        a["_id"] = str(a["_id"])
+        acts.append(a)
     return acts
 
 @app.post("/activities")
@@ -80,11 +79,19 @@ def store_activity(act: Activity):
     act_col.insert_one(act.dict())
     return {"status": "success"}
 
+@app.delete("/activities/{id}")
+def delete_activity(id: str):
+    result = act_col.delete_one({"_id": ObjectId(id)})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Activity not found")
+    return {"status": "deleted"}
 
 @app.get("/comments")
 def get_comments():
-    print("frontend wants all comments")
-    comments = list(com_col.find({}, {"_id": 0}).sort("time", -1))
+    comments = []
+    for c in com_col.find({}).sort("date", -1):
+        c["_id"] = str(c["_id"])
+        comments.append(c)
     return comments
 
 @app.post("/comments")
@@ -92,3 +99,10 @@ def store_comment(com: Comment):
     print("Storing comments to backend")
     com_col.insert_one(com.dict())
     return {"status": "success"}
+
+@app.delete("/comments/{id}")
+def delete_comment(id: str):
+    result = com_col.delete_one({"_id": ObjectId(id)})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Comment not found")
+    return {"status": "deleted"}

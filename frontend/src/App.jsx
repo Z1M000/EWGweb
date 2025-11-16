@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import logo from "./logo.svg";
 import Roadmap from "./components/Roadmap";
 import "./App.css";
@@ -16,7 +16,42 @@ import AuthPage from "./components/AuthPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => {
+
+  const savedUser = localStorage.getItem("user");
+    const loginTime = localStorage.getItem("loginTime");
+
+    if (!savedUser || !loginTime) return null;
+
+    const now = Date.now();
+    const THIRTY_MIN = 30 * 60 * 1000;
+
+    if (now - parseInt(loginTime) > THIRTY_MIN) {
+      localStorage.removeItem("user");
+      localStorage.removeItem("loginTime");
+      return null;
+    }
+
+    return JSON.parse(savedUser);
+  });
+
+  useEffect(() => {
+    if (!user) return;
+
+    const interval = setInterval(() => {
+      const loginTime = parseInt(localStorage.getItem("loginTime"));
+      if (!loginTime) return;
+
+      const now = Date.now();
+      const THIRTY_MIN = 30 * 60 * 1000;
+      
+      if (now - loginTime > THIRTY_MIN) {
+        handleLogout();
+      }
+    }, 10000);
+
+    return () => clearInterval(interval);
+  }, [user]);
 
   function handleLogout() {
     setUser(null);
@@ -25,15 +60,11 @@ function App() {
   return (
      <Router>
       <Header user={user} onLogout={() => setUser(null)} />
-
       <Routes>
 
       <Route path="/" element={<Home user={user} />} />
-
-      {/* Login page */}
       <Route path="/login" element={<AuthPage onLogin={setUser} />} />
 
-      {/* Example private page */}
       <Route
         path="/activities"
         element={

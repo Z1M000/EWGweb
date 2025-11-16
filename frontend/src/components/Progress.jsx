@@ -1,7 +1,7 @@
 import "../component_styles/Progress.css";
 import { useState, useEffect } from "react";
 
-function Progress({ reload, onTotalPointsChange }) {
+function Progress({ reload, onTotalPointsChange, user  }) {
   const [activities, setActivities] = useState([]);
   const [totalPoints, setTotalPoints] = useState(0);
   const [error, setError] = useState("");
@@ -41,6 +41,16 @@ function Progress({ reload, onTotalPointsChange }) {
     return `${month}/${day}/${year}`;
   }
 
+  async function deleteActivity(id) {
+  console.log("Deleting _id:", id);
+
+  await fetch(`http://127.0.0.1:8000/activities/${id}`, {
+    method: "DELETE",
+  });
+
+  loadActivities();
+}
+
   let remaining = totalPoints;
 
   return (
@@ -72,6 +82,18 @@ function Progress({ reload, onTotalPointsChange }) {
                     <td>{act.points}</td>
                     <td>{current}</td>
                     <td>{formatMMDDYYYY_noTZ(act.date)}</td>
+
+                    <td className="actions-cell">
+                      {user?.role === "coach" && (
+                        <button
+                          className="delete-btn"
+                          onClick={() => deleteActivity(act._id)}
+                        >
+                          🗑 Delete
+                        </button>
+                      )}
+                    </td>
+
                   </tr>
                 );
               })}
