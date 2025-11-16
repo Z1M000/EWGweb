@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from pymongo import MongoClient
 from dotenv import load_dotenv
+from bson import ObjectId
 import os
 
 load_dotenv()
@@ -36,11 +37,6 @@ class LoginResponse(BaseModel):
     username: str
     role: str
 
-class Activity(BaseModel):
-    name: str
-    points: int
-    date: str
-
 class Comment(BaseModel):
     name: str
     role: str
@@ -71,7 +67,10 @@ def login(request: LoginRequest):
 @app.get("/activities")
 def get_activities():
     print("frontend wants all activities")
-    acts = list(act_col.find({}, {"_id": 0}).sort("date", -1))
+    acts = []
+    for a in act_col.find({}).sort("date", -1):
+        a["_id"] = str(a["_id"])  # convert ObjectId → string
+        acts.append(a)
     return acts
 
 @app.post("/activities")
@@ -79,6 +78,13 @@ def store_activity(act: Activity):
     print("Storing an activity to backend")
     act_col.insert_one(act.dict())
     return {"status": "success"}
+
+@app.delete("/activities/{id}")
+def delete_activity(id: str):
+    result = act_col.delete_one({"_id": ObjectId(id)})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Activity not found")
+    return {"status": "deleted"}
 
 
 @app.get("/comments")

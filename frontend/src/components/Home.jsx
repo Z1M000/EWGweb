@@ -31,6 +31,7 @@ function Home({ user }) {
       <Roadmap totalPoints={totalPoints} />
       <Border />
       <Progress
+          user={user}
           reload={reloadActivities}
           onTotalPointsChange={handleTotalPointsChange}
         />
