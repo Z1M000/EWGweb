@@ -29,7 +29,6 @@ function Home({ user }) {
   return (
     <div className="page-container">
       <Roadmap totalPoints={totalPoints} />
-      {/* <Border /> */}
       <Progress
           user={user}
           reload={reloadActivities}
